@@ -1,10 +1,14 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const LandingPage = () => {
-  useHisto
+
+  const navigate = useNavigate();
+
   const handleClickLogIn = () => {
 
-    console.log('clicked')
+    navigate('/login')
+
   }
 
 
