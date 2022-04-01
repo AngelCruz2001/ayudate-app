@@ -8,7 +8,7 @@ export const authStartLogin = (email, password) => {
         // const body = await res.json();
         // if (res.ok) {
         // localStorage.setItem('token', token);
-        dispatch(authLogin({
+        dispatch(authLogIn({
             email,
             password
         }));
@@ -48,7 +48,7 @@ export const authStartRegister = (data) => {
                 // localStorage.setItem('token', body.token);
                 // localStorage.setItem('token-init-date', new Date().getTime());
                 console.log(body)
-                // dispatch(authLogin(body))
+                // dispatch(authLogIn(body))
             } else {
                 Swal.fire({
                     title: '¡Oops!',
@@ -65,7 +65,11 @@ export const authStartRegister = (data) => {
     }
 }
 
-const authLogin = (data) => ({
-    type: types.authLogin,
+export const authLogOut = () => ({
+    type: types.authLogOut
+})
+
+const authLogIn = (data) => ({
+    type: types.authLogIn,
     payload: data
 })

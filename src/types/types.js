@@ -1,4 +1,5 @@
 export const types = {
     authStartRegister: '[auth] Start Register',
-    authLogin: '[auth] Login',
+    authLogIn: '[auth] Login',
+    authLogOut: '[auth] Log Out',
 }

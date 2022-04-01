@@ -8,13 +8,17 @@ const initialValues = {
 
 export const authReducer = (state = initialValues, action) => {
     switch (action.type) {
-        case types.authLogin:
+        case types.authLogIn:
             return {
                 ...state,
                 logged: true,
                 email: action.payload.email,
                 password: action.payload.password,
-
+            }
+        case types.authLogOut:
+            return {
+                ...initialValues,
+                logged: false,
             }
         default:
             return state

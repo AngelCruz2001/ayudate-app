@@ -1,6 +1,13 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { authLogOut } from '../../actions/auth';
 
 export const ProfessionalScreen = () => {
+    const dispatch = useDispatch();
+    const handleLogOut = () => {
+        dispatch(authLogOut());
+    }
+
     return (
 
         <section className='chat'>
@@ -9,7 +16,7 @@ export const ProfessionalScreen = () => {
                     <div className="chat__sidebar__profile">
                         <img src="https://cdn-icons-png.flaticon.com/512/194/194938.png" alt="" />
                     </div>
-                    <div className="chat__sidebar__logout">
+                    <div className="chat__sidebar__logout" onClick={handleLogOut}>
                         <i className="fa-solid fa-arrow-right-from-bracket"></i>
                     </div>
                 </div>
