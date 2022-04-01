@@ -82,7 +82,9 @@ export const RegisterScreen = ({ handleClick }) => {
             lname: 'Cruz García',
             phone: '6183259226',
             schedule: '8:00 am - 12:00 pm',
-            document1: { name: 'Añadir documento...' },
+            // document1: '',
+            // document1: '',
+            document1: { name: 'Cargar imagen...' },
             document2: { name: 'Cargar imagen...' },
         },
         isInitialValid: false,
@@ -94,8 +96,8 @@ export const RegisterScreen = ({ handleClick }) => {
             schedule: Yup.string().required('Requerido'),
             // phone: Yup.string().required('Requerido'),
             // cedula: Yup.string().required('Requerido'),
-            document1: Yup.object().shape({ name: Yup.string().required('Requerido'), content: Yup.string().required('Requerido') }),
-            document2: Yup.object().shape({ name: Yup.string().required('Requerido'), content: Yup.string().required('Requerido') }),
+            // document1: Yup.object().shape({ name: Yup.string().required('Requerido'), content: Yup.string().required('Requerido') }),
+            // document2: Yup.object().shape({ name: Yup.string().required('Requerido'), content: Yup.string().required('Requerido') }),
         }),
 
 
@@ -110,9 +112,10 @@ export const RegisterScreen = ({ handleClick }) => {
     });
 
     const [activeDocument, setActiveDocument] = useState('');
-    const [openFileSelector, { filesContent, loading }] = useFilePicker({
+    const [openFileSelector, { loading, plainFiles }] = useFilePicker({
         multiple: false,
         // accept: '.ics,.pdf',
+        // readAs: 'DataURL',
         maxFileSize: 1,
         accept: ['.pdf', '.jpg', '.png', '.jpeg'],
     });
@@ -126,18 +129,17 @@ export const RegisterScreen = ({ handleClick }) => {
     }
 
     useEffect(() => {
-        if (activeDocument !== '' && loading === false && filesContent.length > 0) {
-            setFieldValue(activeDocument, filesContent[0]);
-            console.log(activeDocument, filesContent[0])
+        if (activeDocument !== '' && loading === false && plainFiles.length > 0) {
+            setFieldValue(activeDocument, plainFiles[0]);
             setActiveDocument('');
         }
-    }, [filesContent, loading])
+    }, [plainFiles, loading])
 
-    console.log(isValid)
     return (
         <>
             <h2 className='animate__animated animate__fadeInUp'>¡Bienvenido!</h2>
-            <form onSubmit={handleSubmit} >
+
+            <form onSubmit={handleSubmit}>
                 {
                     inputs.map(input => (
                         <div
@@ -150,6 +152,14 @@ export const RegisterScreen = ({ handleClick }) => {
                                 input.type === 'file'
                                     ?
                                     <>
+                                        {/* <input
+                                            id={input.id}
+                                            name={input.name}
+                                            placeholder={input.placeholder}
+                                            type={input.type}
+                                            onChange={(e) => setFieldValue(input.name, e.target.files[0])}
+                                            // {...getFieldProps(input.name)}
+                                        /> */}
                                         <i className={`fa-solid fa-${input.icon}`} />
                                         <p
                                             id={input.id}
@@ -178,17 +188,18 @@ export const RegisterScreen = ({ handleClick }) => {
                 }
                 <div className='buttonsContainer'>
                     <button
-                        className='animate__animated animate__fadeInUp'
-                        onClick={handleClick}
-                    >
-                        Ya tengo una cuenta
-                    </button>
-                    <button
                         className={`create ${isValid ? 'formikValid' : ''} animate__animated animate__fadeInUp`}
                         type='submit'
                     >
                         Crear cuenta
                     </button>
+                    <button
+                        className='animate__animated animate__fadeInUp'
+                        onClick={handleClick}
+                    >
+                        Ya tengo una cuenta
+                    </button>
+
                 </div>
             </form>
         </>

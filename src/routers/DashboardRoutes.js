@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import { LandingPage } from '../components/landing/LandingPage';
+import { ProfessionalScreen } from '../components/professional/ProfessionalScreen';
 
 export const DashboardRoutes = () => {
     return (
         <>
             <Routes>
-                <Route path="/" element={<LandingPage />} />
+                <Route path="/" element={<ProfessionalScreen />} />
             </Routes>
         </>
     )

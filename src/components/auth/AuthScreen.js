@@ -11,14 +11,12 @@ export const AuthScreen = () => {
 
     const dispatch = useDispatch();
 
-    const [isLogin, setIsLogin] = useState(true);
+    const [isLogin, setIsLogin] = useState(false);
     const handleClick = () => setIsLogin(prev => !prev);
-
 
     return (
 
         <section className='login'>
-
             <div className='login__card'>
                 <div className='login__card__svg'>
                     <img src="./svg/personalData.svg" alt="" />
@@ -34,7 +32,6 @@ export const AuthScreen = () => {
                             />
                     }
                 </div>
-
             </div>
         </section>
 

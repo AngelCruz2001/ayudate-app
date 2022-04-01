@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
-import { useFormik } from 'formik';
+import React from 'react'
 import * as Yup from 'yup';
+import { useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
+import { authStartLogin } from '../../actions/auth';
 
 export const LoginScreen = ({ handleClick }) => {
     const dispatch = useDispatch();
@@ -12,16 +13,14 @@ export const LoginScreen = ({ handleClick }) => {
             password: '',
         },
         isInitialValid: false,
+
         validationSchema: Yup.object({
             email: Yup.string().email('Correo electronico invalido').required('Requerido'),
             password: Yup.string().required('Requerido'),
         }),
 
         onSubmit: (values) => {
-            // dispatch(authStartLogin(values.username, values.password))
-            console.log(values)
-            // dispatch(authStartRegister(values))
-            // resetForm()
+            dispatch(authStartLogin(values.email, values.password))
         },
     });
 
@@ -57,17 +56,18 @@ export const LoginScreen = ({ handleClick }) => {
                 {/* {errors.password && touched.password && <span className='error'>{errors.password}</span>} */}
                 <div className='buttonsContainer'>
                     <button
-                        className='animate__animated animate__fadeInDown'
-                        onClick={handleClick}
-                    >
-                        Todavía no tengo una cuenta
-                    </button>
-                    <button
                         className={`create ${isValid ? 'formikValid' : ''} animate__animated animate__fadeInDown`}
                         type='submit'
                     >
                         Iniciar sesión
                     </button>
+                    <button
+                        className='animate__animated animate__fadeInDown'
+                        onClick={handleClick}
+                    >
+                        Todavía no tengo una cuenta
+                    </button>
+
                 </div>
             </form>
         </>

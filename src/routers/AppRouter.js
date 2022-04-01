@@ -3,6 +3,7 @@ import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 import { DashboardRoutes } from './DashboardRoutes';
 import { DashboardRoutesLogin } from './DashboardRoutesLogin';
+import { LandingPage } from '../components/landing/LandingPage';
 
 
 // import { startChecking } from "../actions/auth";
@@ -21,22 +22,21 @@ export const AppRouter = () => {
 
         <BrowserRouter>
             <Routes>
+                <Route path="/" element={<LandingPage />} />
 
                 <Route path="/login*" element={
-                    // <PublicRoute>
-                    <DashboardRoutesLogin />
-                    // </PublicRoute>
+                    <PublicRoute>
+                        <DashboardRoutesLogin />
+                    </PublicRoute>
                 }
                 />
 
-                <Route path="/*" element={
-                    // <PrivateRoute>
-                    <DashboardRoutes />
-                    // </PrivateRoute>
+                <Route path="/profesional" element={
+                    <PrivateRoute>
+                        <DashboardRoutes />
+                    </PrivateRoute>
                 }
                 />
-
-
 
             </Routes>
         </BrowserRouter>
