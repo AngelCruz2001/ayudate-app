@@ -1,4 +1,4 @@
-const baseUrl = 'http://api.alejandria.edu.mx:3005/api-ale/v1';
+const baseUrl = 'https://ayudat-backend.herokuapp.com/api';
 
 const fetchSinToken = (endpoint, data, method = 'GET') => {
 

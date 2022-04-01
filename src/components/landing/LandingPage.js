@@ -6,9 +6,7 @@ export const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleClickLogIn = () => {
-
     navigate('/login')
-
   }
 
 
@@ -58,8 +56,8 @@ export const LandingPage = () => {
             </div>
             <div className="hero-img-box">
               <picture>
-                <source srcset="img/hero.webp" type="image/webp" />
-                <source srcset="img/hero-min.png" type="image/png" />
+                <source srcSet="img/hero.webp" type="image/webp" />
+                <source srcSet="img/hero-min.png" type="image/png" />
                 <img
                   src="img/hero-min.png"
                   className="hero-img"
