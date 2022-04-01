@@ -6,6 +6,7 @@ export const ProfessionalScreen = () => {
     const dispatch = useDispatch();
     const handleLogOut = () => {
         dispatch(authLogOut());
+        console.log("chava")
     }
 
     return (
