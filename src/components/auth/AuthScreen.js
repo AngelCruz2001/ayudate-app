@@ -24,7 +24,6 @@ export const AuthScreen = () => {
                     <img src="./svg/personalData.svg" alt="" />
                 </div>
                 <div className='login__card__log '>
-                    <h2 className='animate__animated animate__pulse'>¡Bienvenido!</h2>
                     {
                         isLogin
                             ? <RegisterScreen

@@ -135,59 +135,62 @@ export const RegisterScreen = ({ handleClick }) => {
 
     console.log(isValid)
     return (
-        <form onSubmit={handleSubmit} >
-            {
-                inputs.map(input => (
-                    <div
-                        className={`${input.type} inputContainer animate__animated animate__pulse ${errors[input.name] && touched[input.name] && 'error'}`}
-                        key={input.id}
-                        type={input.type}
-                        onClick={(e) => handleClickAddFile(e)}
+        <>
+            <h2 className='animate__animated animate__fadeInUp'>¡Bienvenido!</h2>
+            <form onSubmit={handleSubmit} >
+                {
+                    inputs.map(input => (
+                        <div
+                            className={`${input.type} inputContainer animate__animated animate__fadeInUp ${errors[input.name] && touched[input.name] && 'error'}`}
+                            key={input.id}
+                            type={input.type}
+                            onClick={(e) => handleClickAddFile(e)}
+                        >
+                            {
+                                input.type === 'file'
+                                    ?
+                                    <>
+                                        <i className={`fa-solid fa-${input.icon}`} />
+                                        <p
+                                            id={input.id}
+                                            name={input.name}
+                                            type={input.type}
+                                        >
+                                            {
+                                                getFieldProps(input.name).value.name
+                                            }
+                                        </p>
+                                    </>
+                                    :
+                                    <>
+                                        <i className={`fa-solid fa-${input.icon}`}></i>
+                                        <input
+                                            id={input.id}
+                                            name={input.name}
+                                            placeholder={input.placeholder}
+                                            type={input.type}
+                                            {...getFieldProps(input.name)}
+                                        />
+                                    </>
+                            }
+                        </div>
+                    ))
+                }
+                <div className='buttonsContainer'>
+                    <button
+                        className='animate__animated animate__fadeInUp'
+                        onClick={handleClick}
                     >
-                        {
-                            input.type === 'file'
-                                ?
-                                <>
-                                    <i className={`fa-solid fa-${input.icon}`} />
-                                    <p
-                                        id={input.id}
-                                        name={input.name}
-                                        type={input.type}
-                                    >
-                                        {
-                                            getFieldProps(input.name).value.name
-                                        }
-                                    </p>
-                                </>
-                                :
-                                <>
-                                    <i className={`fa-solid fa-${input.icon}`}></i>
-                                    <input
-                                        id={input.id}
-                                        name={input.name}
-                                        placeholder={input.placeholder}
-                                        type={input.type}
-                                        {...getFieldProps(input.name)}
-                                    />
-                                </>
-                        }
-                    </div>
-                ))
-            }
-            <div className='buttonsContainer'>
-                <button
-                    className='animate__animated animate__pulse'
-                    onClick={handleClick}
-                >
-                    Ya tengo una cuenta
-                </button>
-                <button
-                    className={`create ${isValid ? 'formikValid' : ''} animate__animated animate__pulse`}
-                    type='submit'
-                >
-                    Crear cuenta
-                </button>
-            </div>
-        </form>
+                        Ya tengo una cuenta
+                    </button>
+                    <button
+                        className={`create ${isValid ? 'formikValid' : ''} animate__animated animate__fadeInUp`}
+                        type='submit'
+                    >
+                        Crear cuenta
+                    </button>
+                </div>
+            </form>
+        </>
     )
 }
