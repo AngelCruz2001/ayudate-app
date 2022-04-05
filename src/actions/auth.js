@@ -34,7 +34,7 @@ export const authStartRegister = (data) => {
     return async (dispatch) => {
         // dispatch(authCheckingStart());
         const formData = new FormData();
-        const url = 'https://ayudat-backend.herokuapp.com/api/registration/professional/';
+        const url = 'https://ayudat-backend.herokuapp.com/api/auth/professional/';
         for (const name in data) {
             formData.append(name, data[name]);
         }
@@ -44,15 +44,17 @@ export const authStartRegister = (data) => {
             console.log(body)
             console.log(res)
             // dispatch(authCheckingFinish())
-            if (body.ok) {
+            if (res.ok) {
                 // localStorage.setItem('token', body.token);
                 // localStorage.setItem('token-init-date', new Date().getTime());
                 console.log(body)
                 // dispatch(authLogIn(body))
             } else {
+
+                const err = Object.keys(body).map(key => body[key]).join(', ');
                 Swal.fire({
                     title: '¡Oops!',
-                    text: body.msg,
+                    text: err,
                     icon: 'question',
                     confirmButtonText: 'Tratar de nuevo'
                 })

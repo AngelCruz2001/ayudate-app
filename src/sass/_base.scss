@@ -329,6 +329,25 @@ body {
   }
 }
 
+input:focus,
+select:focus {
+  outline: none;
+}
+
+input {
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
 *,
 .scroll {
   &::-webkit-scrollbar {

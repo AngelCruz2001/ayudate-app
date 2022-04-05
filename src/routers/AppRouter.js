@@ -31,7 +31,7 @@ export const AppRouter = () => {
                 }
                 />
 
-                <Route path="/profesional" element={
+                <Route path="main/*" element={
                     <PrivateRoute>
                         <DashboardRoutes />
                     </PrivateRoute>

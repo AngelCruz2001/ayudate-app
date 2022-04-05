@@ -55,6 +55,15 @@
     }
 }
 
+@keyframes loadingSkeleton {
+    0% {
+      transform: skewX(-10deg) translateX(-100%);
+    }
+    100% {
+      transform: skewX(-10deg) translateX(200%);
+    }
+  }
+
 @font-face {
     font-family: "Segoe UI";
     src: url("./typography/Segoe_UI.ttf") format("truetype");
@@ -72,3 +81,9 @@
     font-family: "Segoe UI Italic";
     src: url("./typography/Segoe_UI_Italic.ttf") format("truetype");
 }
+
+// @mixin skeleton() {
+//     .mod__list__item .skeleton {
+
+//     }
+// }
