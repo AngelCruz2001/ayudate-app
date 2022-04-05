@@ -18,7 +18,7 @@ export const profStartGetProfessionals = () => {
                     image: 'https://static.vecteezy.com/system/resources/thumbnails/001/993/889/small/beautiful-latin-woman-avatar-character-icon-free-vector.jpg',
                     status: false
                 }))))
-            }, 2000)
+            }, 1000)
 
             dispatch(uiFinishLoading())
         } catch (error) {
