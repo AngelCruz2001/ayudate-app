@@ -1,5 +1,5 @@
 .mod__list {
-    padding: 1rem 2rem;
+    padding: 1rem 0.5rem;
     font-size: 2rem;
     flex: 1;
     overflow-y: scroll;
@@ -7,16 +7,16 @@
         display: flex;
         align-items: center;
         box-shadow: 0px 1px 3px $color-secondary;
-        padding: 0 2rem;
+        padding: 0 1.5rem;
         width: 100%;
         height: 10rem;
         margin-bottom: 1.5rem;
         background-color: white;
+        justify-content: space-between;
         &__image {
             width: 6rem;
             height: 6rem;
             border-radius: 50%;
-            margin-right: 2rem;
             overflow: hidden;
             img {
                 width: 100%;
@@ -26,13 +26,17 @@
         }
 
         &__info {
+            width: calc(100% - 20rem);
             display: flex;
             align-items: center;
             height: 100%;
-            gap: 5rem;
-            margin-right: 5%;
+            // margin-right: 5%;
             .personal {
+                display: flex;
+                flex-direction: column;
+                width: 31rem;
                 .name {
+                    width: 100%;
                     font-size: 2.3rem;
                     font-weight: bold;
                     color: $color-secondary;
@@ -41,27 +45,25 @@
             }
             .contact {
                 display: flex;
-                align-items: center;
-                margin-left: auto;
-                gap: 5rem;
-                p {
+                .number {
+                    // width: 16rem;
+                    width: 18rem;
+                }
+                .email {
+                    // width: 29rem;
+                    width: 34rem;
+                }
+                .schedule {
+                    // width: 29rem;
+                    width: 24rem;
+                }
+
+                span {
                     display: flex;
-                    justify-content: center;
                     align-items: center;
                     font-size: 2.2rem;
                     gap: 1rem;
                     height: 5rem;
-                    i {
-                        height: 100%;
-                        display: flex;
-                        align-items: center;
-                    }
-                    span {
-                        height: 100%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                    }
                 }
             }
             .btn-download {
@@ -85,9 +87,9 @@
         &__actions {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 3rem;
-            // margin-left: 5%;
+            justify-content: flex-end;
+            width: 10rem;
+            gap: 1rem;
 
             button {
                 background-color: darken(white, 14%);
@@ -102,7 +104,8 @@
                 justify-content: center;
             }
 
-            .btn-decline {
+            .btn-decline,
+            .btn-delete {
                 color: rgb(216, 73, 73);
                 &:hover {
                     color: darken(white, 6%);
@@ -156,24 +159,33 @@
             }
 
             .mod__list__item__info {
+                // justify-content: space-between;
                 .personal {
+                    padding-right: 3rem;
                     .name {
                         background: #eee;
                         color: #eee;
-                        border-radius: 5px;
                     }
                     .curp {
                         background: #eee;
                         color: #eee;
-                        border-radius: 5px;
                     }
                 }
                 .contact {
-                    p {
+                    gap: 2rem;
+                    span {
                         background: #eee;
                         color: #eee;
-
                         border-radius: 5px;
+                    }
+                    .number {
+                        width: 16rem;
+                    }
+                    .email {
+                        width: 29rem;
+                    }
+                    .schedule {
+                        width: 20rem;
                     }
                 }
 
@@ -181,6 +193,8 @@
                     background: #eee;
                     color: #eee;
                     border-radius: 5px;
+                    width: 10rem;
+                    margin-left: 4rem;
                 }
             }
 
@@ -189,6 +203,7 @@
                     background: #eee;
                     color: #eee;
                     border-radius: 5px;
+                    border: none;
                 }
             }
 

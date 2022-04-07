@@ -1,7 +1,7 @@
 export const types = {
     uiStartLoading: '[ui] Start Loading',
     uiFinishLoading: '[ui] Finish Loading',
-    
+
     authStartRegister: '[auth] Start Register',
     authLogIn: '[auth] Login',
     authLogOut: '[auth] Log Out',
@@ -11,5 +11,12 @@ export const types = {
     profAcceptProfessional: '[prof] Accept Professional',
     profRejectProfessional: '[prof] Reject Professional',
     profUpdateProfessional: '[prof] Update Professional',
-    
+
+    chatSetCurrentContact: '[chat] Set Current Contact',
+    chatAddMessage: '[chat] Add Message',
+    chatSetMessage: '[chat] Set Message',
+    chatDeleteCurrentChat: '[chat] Delete Current Chat',
+    chatStartLoading: '[chat] Start Loading',
+    chatFinishLoading: '[chat] Finish Loading',
+    chatSetSocket: '[chat] Set Socket',
 }

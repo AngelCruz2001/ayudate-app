@@ -11,7 +11,7 @@ const user = {
 
 
 export const ProfessionalScreen = () => {
-
+    
     return (
         <>
             <Sidebar />

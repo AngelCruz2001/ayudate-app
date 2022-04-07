@@ -34,16 +34,29 @@ export const authStartRegister = (data) => {
     return async (dispatch) => {
         // dispatch(authCheckingStart());
         const formData = new FormData();
-        const url = 'https://ayudat-backend.herokuapp.com/api/auth/professional/';
+        const url = 'https://ayudat-backend.herokuapp.com/api/professional/';
         for (const name in data) {
             formData.append(name, data[name]);
         }
         try {
+
+            Swal.fire({
+                title: 'Uploading...',
+                html: 'Please wait...',
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+
             const res = await fetch(url, { method: 'POST', body: formData });
             const body = await res.json()
             console.log(body)
             console.log(res)
             // dispatch(authCheckingFinish())
+            Swal.close();
+
             if (res.ok) {
                 // localStorage.setItem('token', body.token);
                 // localStorage.setItem('token-init-date', new Date().getTime());
@@ -64,6 +77,7 @@ export const authStartRegister = (data) => {
             // dispatch(authCheckingFinish())
             Swal.fire('Error', 'Hablar con el administrador', 'error')
         }
+
     }
 }
 

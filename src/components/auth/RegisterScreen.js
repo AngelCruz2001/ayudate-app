@@ -14,6 +14,14 @@ const inputs = [
         icon: 'envelope',
     },
     {
+        id: 'password',
+        name: 'password',
+        placeholder: 'Contraseña',
+        type: 'password',
+        icon: 'lock',
+    
+    },
+    {
         id: 'curp',
         name: 'curp',
         placeholder: 'CURP',

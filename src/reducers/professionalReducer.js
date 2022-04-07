@@ -1,16 +1,15 @@
 import { types } from "../types/types"
 
-
-
-
-
 const initialValues = {
-    data: Array(5).fill({ id: 0, name: '', number: '', curp: '', email: '', schedule: '', document: '', image: '', status: false }),
+    data: [],
 }
 
 export const professionalReducer = (state = initialValues, action) => {
     switch (action.type) {
         case types.profGetProfessionals:
+
+            console.log(action.payload)
+            console.log(state.data)
             return {
                 ...state,
                 data: action.payload,
@@ -24,13 +23,14 @@ export const professionalReducer = (state = initialValues, action) => {
         case types.profAcceptProfessional:
             return {
                 ...state,
-                data: state.data.map(p => p.id === action.payload.id ? { ...p, status: true } : p),
+                data: state.data.map(p => p.id === action.payload ? { ...p, status: true } : p),
             }
 
         case types.profRejectProfessional:
             return {
                 ...state,
-                data: state.data.map(p => p.id === action.payload.id ? { ...p, status: false } : p),
+                data: state.data.filter(p => p.id !== action.payload),
+                // data: state.data.map(p => p.id === action.payload.id ? { ...p, status: false } : p),
             }
 
         case types.profUpdateProfessional:

@@ -55,14 +55,24 @@
     }
 }
 
+// Loading cirlce animation
+@keyframes loading-circle {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
 @keyframes loadingSkeleton {
     0% {
-      transform: skewX(-10deg) translateX(-100%);
+        transform: skewX(-10deg) translateX(-100%);
     }
     100% {
-      transform: skewX(-10deg) translateX(200%);
+        transform: skewX(-10deg) translateX(200%);
     }
-  }
+}
 
 @font-face {
     font-family: "Segoe UI";

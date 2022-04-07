@@ -9,20 +9,21 @@ import { profStartGetProfessionals } from '../../actions/professional'
 
 export const ModScreen = () => {
   const dispatch = useDispatch();
-  const { prof: { data }, ui } = useSelector(state => state)
+  const { prof: { data }, ui: { loading } } = useSelector(state => state)
   const [searchValue, setSearchValue] = useState({ word: '', filter: '' })
-  const [professionals, setProfessionals] = useState(data)
+  const [professionals, setProfessionals] = useState([])
 
   useEffect(() => {
     dispatch(profStartGetProfessionals())
   }, [])
-  console.log(data)
-
 
   useEffect(() => {
-    let professionalsFiltered = data.filter(p => isACoincidenceSearch([p.name, p.curp], searchValue.word))
-    professionalsFiltered = professionalsFiltered.filter(p => (p.status).toString() === searchValue.filter || searchValue.filter === '')
+    setProfessionals(data)
+  }, [data])
 
+  useEffect(() => {
+    let professionalsFiltered = data.filter(p => isACoincidenceSearch([p.fname, p.curp], searchValue.word))
+    professionalsFiltered = professionalsFiltered.filter(p => (p.status).toString() === searchValue.filter || searchValue.filter === '')
     setProfessionals(professionalsFiltered)
 
   }, [searchValue.word, searchValue.filter])
@@ -31,10 +32,10 @@ export const ModScreen = () => {
     <>
       <Sidebar />
       <div className='mod'>
+
         <header>
           <h1>Profesionales</h1>
         </header>
-
 
         <div className='mod__main'>
 
@@ -43,7 +44,7 @@ export const ModScreen = () => {
             setSearchValue={setSearchValue}
           />
 
-          <List professionals={professionals} />
+          <List professionals={professionals} loading={loading} />
         </div>
 
       </div>
