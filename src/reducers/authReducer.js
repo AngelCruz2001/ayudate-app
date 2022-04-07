@@ -1,7 +1,7 @@
 import { types } from "../types/types"
 
 const initialValues = {
-    logged: true,
+    logged: false,
     email: '',
     password: '',
 }
