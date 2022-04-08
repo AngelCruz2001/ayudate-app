@@ -2,128 +2,35 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { useFilePicker } from 'use-file-picker';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { authStartRegister } from '../../actions/auth';
-
-const inputs = [
-    {
-        id: 'email',
-        name: 'email',
-        placeholder: 'Correo electronico',
-        type: 'email',
-        icon: 'envelope',
-    },
-    {
-        id: 'password',
-        name: 'password',
-        placeholder: 'Contraseña',
-        type: 'password',
-        icon: 'lock',
-    
-    },
-    {
-        id: 'curp',
-        name: 'curp',
-        placeholder: 'CURP',
-        type: 'text',
-        icon: 'id-badge',
-        maxLength: 18,
-    },
-    {
-        id: 'fname',
-        name: 'fname',
-        placeholder: 'Nombre(s)',
-        type: 'text',
-        icon: 'user',
-        maxLength: 12,
-    },
-    {
-        id: 'lname',
-        name: 'lname',
-        placeholder: 'Apellido(s)',
-        type: 'text',
-        icon: 'user',
-        maxLength: 12,
-    },
-    {
-        id: 'phone',
-        name: 'phone',
-        placeholder: 'Teléfono',
-        type: 'text',
-        icon: 'phone',
-        maxLength: 10,
-    },
-    {
-        id: 'schedule',
-        name: 'schedule',
-        placeholder: 'Horario ',
-        type: 'text',
-        icon: 'clock',
-    },
-    {
-        id: 'document1',
-        name: 'document1',
-        placeholder: 'Cédula',
-        type: 'file',
-        icon: 'file',
-    },
-    {
-        id: 'document2',
-        name: 'document2',
-        placeholder: 'Foto',
-        type: 'file',
-        icon: 'image',
-    },
-
-]
+import { authStartRegisterProfessional, authStartRegisterPatient } from '../../actions/auth';
+import { CustomInput } from '../ui/register/Inputs';
+import { initialValuesRegister } from '../../formikConfig/intialValues/initialValuesRegister';
+import { registerSchema } from '../../formikConfig/schemasValidator/registerSchema';
+import { inputsRegister } from '../../formikConfig/inputs/inputsRegister';
 
 
 export const RegisterScreen = ({ handleClick }) => {
     const dispatch = useDispatch();
 
+    const [isPatient, setIsPatient] = useState(true);
+
+    const inputs = isPatient ? inputsRegister.patient : inputsRegister.professional;
+
     const { handleSubmit, errors, touched, getFieldProps, resetForm, setFieldValue, values, isValid } = useFormik({
         enableReinitialize: true,
-        initialValues: {
-            email: 'angi_ed01@hotmail.com',
-            curp: 'CUGA010714HDGRRNA1',
-            fname: 'Ángel',
-            lname: 'Cruz García',
-            phone: '6183259226',
-            schedule: '8:00 am - 12:00 pm',
-            // document1: '',
-            // document1: '',
-            document1: { name: 'Cargar imagen...' },
-            document2: { name: 'Cargar imagen...' },
-        },
+        initialValues: isPatient ? initialValuesRegister.patient : initialValuesRegister.professional,
         isInitialValid: false,
-        validationSchema: Yup.object({
-            email: Yup.string().email('Correo electronico invalido').required('Required'),
-            curp: Yup.string().min(18).required('Requerido'),
-            fname: Yup.string().required('Requerido'),
-            lname: Yup.string().required('Requerido'),
-            schedule: Yup.string().required('Requerido'),
-            // phone: Yup.string().required('Requerido'),
-            // cedula: Yup.string().required('Requerido'),
-            // document1: Yup.object().shape({ name: Yup.string().required('Requerido'), content: Yup.string().required('Requerido') }),
-            // document2: Yup.object().shape({ name: Yup.string().required('Requerido'), content: Yup.string().required('Requerido') }),
-        }),
-
-
+        validationSchema: isPatient ? registerSchema.patient : registerSchema.professional,
         onSubmit: (values) => {
-            // dispatch(authStartLogin(values.username, values.password))
-            console.log(values)
-            dispatch(authStartRegister(values))
-            // resetForm()
+            dispatch(isPatient ? authStartRegisterPatient(values, handleClick) : authStartRegisterProfessional(values, handleClick))
         },
-
 
     });
 
     const [activeDocument, setActiveDocument] = useState('');
+
     const [openFileSelector, { loading, plainFiles }] = useFilePicker({
         multiple: false,
-        // accept: '.ics,.pdf',
-        // readAs: 'DataURL',
         maxFileSize: 1,
         accept: ['.pdf', '.jpg', '.png', '.jpeg'],
     });
@@ -143,10 +50,25 @@ export const RegisterScreen = ({ handleClick }) => {
         }
     }, [plainFiles, loading])
 
+
+    const handleTypeUserChange = ({ target }) => setIsPatient(target.id === 'patient');
+
+
     return (
         <>
-            <h2 className='animate__animated animate__fadeInUp'>¡Bienvenido!</h2>
-
+            <div className='title'>
+                <h2 className='animate__animated animate__fadeInUp'>¡Bienvenido!</h2>
+                <div className='title__radio animate__animated animate__fadeInUp'>
+                    <label className={`${!isPatient && 'active'}`}>
+                        <input type="radio" name="typeUser" id='professional' className="title__radio__element" onChange={handleTypeUserChange} />
+                        Profesional
+                    </label>
+                    <label className={`${isPatient && 'active'}`}>
+                        <input type="radio" name="typeUser" id='patient' className="title__radio__element" onChange={handleTypeUserChange} />
+                        Paciente
+                    </label>
+                </div>
+            </div>
             <form onSubmit={handleSubmit}>
                 {
                     inputs.map(input => (
@@ -156,44 +78,12 @@ export const RegisterScreen = ({ handleClick }) => {
                             type={input.type}
                             onClick={(e) => handleClickAddFile(e)}
                         >
-                            {
-                                input.type === 'file'
-                                    ?
-                                    <>
-                                        {/* <input
-                                            id={input.id}
-                                            name={input.name}
-                                            placeholder={input.placeholder}
-                                            type={input.type}
-                                            onChange={(e) => setFieldValue(input.name, e.target.files[0])}
-                                            // {...getFieldProps(input.name)}
-                                        /> */}
-                                        <i className={`fa-solid fa-${input.icon}`} />
-                                        <p
-                                            id={input.id}
-                                            name={input.name}
-                                            type={input.type}
-                                        >
-                                            {
-                                                getFieldProps(input.name).value.name
-                                            }
-                                        </p>
-                                    </>
-                                    :
-                                    <>
-                                        <i className={`fa-solid fa-${input.icon}`}></i>
-                                        <input
-                                            id={input.id}
-                                            name={input.name}
-                                            placeholder={input.placeholder}
-                                            type={input.type}
-                                            {...getFieldProps(input.name)}
-                                        />
-                                    </>
-                            }
+                            <CustomInput getFieldProps={getFieldProps} input={input} />
                         </div>
                     ))
                 }
+
+
                 <div className='buttonsContainer'>
                     <button
                         className={`create ${isValid ? 'formikValid' : ''} animate__animated animate__fadeInUp`}

@@ -14,9 +14,12 @@ export const types = {
 
     chatSetCurrentContact: '[chat] Set Current Contact',
     chatAddMessage: '[chat] Add Message',
-    chatSetMessage: '[chat] Set Message',
+    chatSetCurrentMessages: '[chat] Set Current Messages',
     chatDeleteCurrentChat: '[chat] Delete Current Chat',
     chatStartLoading: '[chat] Start Loading',
     chatFinishLoading: '[chat] Finish Loading',
     chatSetSocket: '[chat] Set Socket',
+    chatSetOnline: '[chat] Set Online',
+    chatSetContacts: '[chat] Set Contacts',
+
 }

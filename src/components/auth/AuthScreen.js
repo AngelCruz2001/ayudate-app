@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import { useLogin } from '../../hooks/useLogin';
 import { LoginScreen } from './LoginScreen';
 import { RegisterScreen } from './RegisterScreen';
-import { useDispatch } from 'react-redux';
-import * as Yup from 'yup';
-import { useFormik } from 'formik';
-import { authStartRegister } from '../../actions/auth';
-
 
 export const AuthScreen = () => {
 
-    const dispatch = useDispatch();
-
-    const [isLogin, setIsLogin] = useState(false);
-    const handleClick = () => setIsLogin(prev => !prev);
+    const [isLogin, setIsLogin] = useLogin(false);
 
     return (
 
@@ -25,10 +18,10 @@ export const AuthScreen = () => {
                     {
                         isLogin
                             ? <RegisterScreen
-                                handleClick={handleClick}
+                                handleClick={setIsLogin}
                             />
                             : <LoginScreen
-                                handleClick={handleClick}
+                                handleClick={setIsLogin}
                             />
                     }
                 </div>

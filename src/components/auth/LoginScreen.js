@@ -9,8 +9,8 @@ export const LoginScreen = ({ handleClick }) => {
 
     const { handleSubmit, errors, touched, getFieldProps, resetForm, isValid } = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            email: 'angi_ed01Patient@hotmail.com',
+            password: '123456',
         },
         isInitialValid: false,
 
@@ -26,7 +26,9 @@ export const LoginScreen = ({ handleClick }) => {
 
     return (
         <>
-            <h2 className='animate__animated animate__fadeInDown'>¡Bienvenido de nuevo!</h2>
+            <div className='title'>
+                <h2 className='animate__animated animate__fadeInDown'>¡Bienvenido de nuevo!</h2>
+            </div>
 
             <form onSubmit={handleSubmit}>
                 <div className={`
@@ -42,7 +44,6 @@ export const LoginScreen = ({ handleClick }) => {
                         {...getFieldProps('email')}
                     />
                 </div>
-                {/* {errors.username && touched.username && <span className='error'>{errors.username}</span>} */}
                 <div className={`inputContainer animate__animated animate__fadeInDown ${errors.password && touched.password && 'error'}`}>
                     <i className="fa-solid fa-lock"></i>
                     <input
@@ -53,7 +54,6 @@ export const LoginScreen = ({ handleClick }) => {
                         {...getFieldProps('password')}
                     />
                 </div>
-                {/* {errors.password && touched.password && <span className='error'>{errors.password}</span>} */}
                 <div className='buttonsContainer'>
                     <button
                         className={`create ${isValid ? 'formikValid' : ''} animate__animated animate__fadeInDown`}

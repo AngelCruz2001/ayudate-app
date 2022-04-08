@@ -25,15 +25,16 @@ const fetchConToken = (endpoint, data, method = 'GET') => {
         return fetch(url, {
             method,
             headers: {
-                'x-token': token
+                Authentication: token
             }
         });
     } else {
         return fetch(url, {
             method,
+            mode: 'no-cors',
             headers: {
                 'Content-type': 'application/json',
-                'x-token': token
+                Authentication: token
             },
             body: JSON.stringify(data)
         });

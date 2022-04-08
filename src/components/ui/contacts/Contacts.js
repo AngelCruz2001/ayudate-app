@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { chatDeleteCurrentChat, chatSetCurrentContact } from '../../../actions/chat';
+import { chatDeleteCurrentChat, chatSetContacts, chatSetCurrentContact } from '../../../actions/chat';
 import { isACoincidenceSearch } from '../../../helpers/isACoincidence';
 
 export const Contacts = () => {
@@ -9,11 +9,16 @@ export const Contacts = () => {
 
     const [searchValue, setSearchValue] = useState('');
     const handleClickContact = (contact) => {
-        console.log(contact);
+        // console.log(contact);
         dispatch(chatDeleteCurrentChat());
         dispatch(chatSetCurrentContact(contact));
     }
-    console.log(contacts.filter(({ name }) => name.match(RegExp(searchValue, 'gi'))));
+    // console.log(contacts.filter(({ name }) => name.match(RegExp(searchValue, 'gi'))));
+
+    useEffect(() => {
+        dispatch(chatSetContacts());
+    }, [])
+    
 
     const handleSearchChange = (e) => {
         const { value } = e.target;

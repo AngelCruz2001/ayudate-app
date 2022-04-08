@@ -6,17 +6,12 @@ import { DashboardRoutesLogin } from './DashboardRoutesLogin';
 import { LandingPage } from '../components/landing/LandingPage';
 
 
-// import { startChecking } from "../actions/auth";
-// import { useDispatch } from "react-redux";
-// import { useEffect } from 'react';
+
 
 
 export const AppRouter = () => {
 
-    // const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(startChecking())
-    // }, [dispatch])
+  
 
     return (
 
