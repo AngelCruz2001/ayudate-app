@@ -11,8 +11,9 @@ export const useSocket = (userProfe = '', userPatient = '') => {
     const roomName = userProfe.replace(/[@.\-_]/g, '') + userPatient.replace(/[@.\-_]/g, '');
     const ws = useMemo(() => {
         console.log(roomName)
-        return new WebSocket(`ws://127.0.0.1:8000/ws/chat/asdf/`)
-        // return new WebSocket(`ws://ayudat-backend.herokuapp.com/ws/chat/asdf/`)
+        // return new WebSocket(`ws://127.0.0.1:8000/ws/chat/asdf/`)
+
+        return new WebSocket(`ws://ayudat-backend.herokuapp.com/ws/chat/${roomName}/`)
     }, [roomName])
     const [online, setOnline] = useState(false);
 
