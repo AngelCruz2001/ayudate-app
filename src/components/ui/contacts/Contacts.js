@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { chatDeleteCurrentChat, chatSetContacts, chatSetCurrentContact } from '../../../actions/chat';
+import { chatDeleteCurrentChat, chatSetCurrentContact, chatStartSetContacts } from '../../../actions/chat';
 import { isACoincidenceSearch } from '../../../helpers/isACoincidence';
 
 export const Contacts = () => {
@@ -16,7 +16,7 @@ export const Contacts = () => {
     // console.log(contacts.filter(({ name }) => name.match(RegExp(searchValue, 'gi'))));
 
     useEffect(() => {
-        dispatch(chatSetContacts());
+        dispatch(chatStartSetContacts());
     }, [])
     
 
@@ -34,7 +34,7 @@ export const Contacts = () => {
             </div>
             <div className="contacts__list">
                 {
-                    contacts.filter(({ name }) => name.match(RegExp(searchValue, 'gi'))).map(contact => (
+                    contacts.filter((contact) => (contact.fname + ' ' + contact.lname).match(RegExp(searchValue, 'gi'))).map(contact => (
                         <div
                             className={`contacts__list__contact animate__animated animate__slideInLeft ${currentContact && currentContact.id === contact.id ? 'current' : ''}`}
                             key={contact.id}
@@ -42,19 +42,19 @@ export const Contacts = () => {
                         >
                             <div className='contacts__list__contact__header'>
                                 <div className="contacts__list__contact__header__avatar">
-                                    <img src={contact.avatar} alt="" />
+                                    <img src={contact.document2} alt="" />
                                 </div>
                                 <div className="contacts__list__contact__header__name">
                                     <p>
-                                        {contact.name}
+                                        {contact.fname + ' ' + contact.lname}
                                     </p>
                                 </div>
-                                <span> {contact.lastMessageTime}</span>
+                                {/* <span> {contact.lastMessageTime}</span> */}
                             </div>
 
                             <div className="contacts__list__contact__preview">
                                 <p>
-                                    {contact.lastMessage}
+                                    {/* {contact.lastMessage} */}
                                 </p>
                             </div>
 

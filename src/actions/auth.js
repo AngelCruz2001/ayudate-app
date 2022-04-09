@@ -28,7 +28,7 @@ export const authStartLogin = (email, password) => {
                     showConfirmButton: false,
                 });
 
-                localStorage.setItem('token', body.data.ccess);
+                localStorage.setItem('token', body.data.access);
                 localStorage.setItem('token-init-date', new Date().getTime());
                 localStorage.setItem('token-refresh', body.data.refresh);
                 console.log(body)
@@ -65,7 +65,8 @@ export const authStartRegisterProfessional = (data, setIsLogin) => {
     return async (dispatch) => {
         // dispatch(authCheckingStart());
         const formData = new FormData();
-        const url = 'https://ayudat-backend.herokuapp.com/api/professional/create/';
+        const url = 'http://127.0.0.1:8000/api/professional/create/';
+        // const url = 'https://ayudat-backend.herokuapp.com/api/professional/create/';
         for (const name in data) {
             formData.append(name, data[name]);
         }

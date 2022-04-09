@@ -1,30 +1,39 @@
 import { useMemo, useState } from "react";
 
-const { useDispatch } = require("react-redux");
-const { chatSetSocket, chatSetOnline, chatSetCurrentMessages } = require("../actions/chat");
+const { useDispatch, useSelector } = require("react-redux");
+const { chatSetSocket, chatSetOnline, chatSetCurrentMessages, chatAddMessage } = require("../actions/chat");
 
-export const useSocket = (userProfe, userPatient) => {
+export const useSocket = (userProfe = '', userPatient = '') => {
     const dispath = useDispatch()
-    console.log(userProfe, userPatient)
+    const { email } = useSelector(state => state.auth)
     // profe + patient
-
-    const ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/asdfasdfSDA/`)
+    // quit @ . - _ . 
+    const roomName = userProfe.replace(/[@.\-_]/g, '') + userPatient.replace(/[@.\-_]/g, '');
+    const ws = useMemo(() => {
+        console.log(roomName)
+        return new WebSocket(`ws://127.0.0.1:8000/ws/chat/asdf/`)
+        // return new WebSocket(`ws://ayudat-backend.herokuapp.com/ws/chat/asdf/`)
+    }, [roomName])
     const [online, setOnline] = useState(false);
 
     ws.onopen = (data) => {
         dispath(chatSetSocket(ws));
         setOnline(true);
         console.log("Socket connected")
-        const dataFormated = JSON.stringify(data);
-        console.log(data)
-
-        dispath(chatSetCurrentMessages([]));
     };
 
     ws.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        console.log(data);
-        dispath(chatSetCurrentMessages(data));
+
+        if (data.conversationId !== undefined) {
+            dispath(chatSetCurrentMessages(data.messages));
+        }
+
+        if (data.type === 'chat_message') {
+            console.log(data)
+            dispath(chatAddMessage({ ...data, sender: data.from === email ? 0 : 1 }));
+        }
+
     };
 
     ws.onclose = () => {
@@ -37,6 +46,9 @@ export const useSocket = (userProfe, userPatient) => {
         ws.close();
     };
 
+    const emitAMessage = (message) => {
+        ws.send(JSON.stringify(message));
+    };
 
-    return { ws, online, closeConnection };
+    return { ws, online, closeConnection, emitAMessage };
 }

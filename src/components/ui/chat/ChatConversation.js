@@ -1,4 +1,4 @@
-import React,{ Fragment, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { Fragment, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSocket } from '../../../hooks/useSocket'
 import { chatAddMessage } from '../../../actions/chat';
@@ -8,10 +8,9 @@ export const ChatConversation = ({ currentContact }) => {
 
     const dispatch = useDispatch();
 
-    const { auth: { email, type }, chat } = useSelector(state => state)
+    const { auth: { email, userType }, chat } = useSelector(state => state)
 
-    const { socket, closeConnection } = useSocket(type == 0 ? currentContact.email : email, type == 0 ? email : currentContact.email);
-    console.log('asdf')
+    const { socket, closeConnection, emitAMessage } = useSocket(userType == 0 ? currentContact.email : email, userType == 0 ? email : currentContact.email);
     const { loading, currentMessages } = chat;
 
     // useEffect(() => {
@@ -42,15 +41,12 @@ export const ChatConversation = ({ currentContact }) => {
         if (e.key === 'Enter' && message !== '') {
             e.preventDefault();
 
-            socket.emit('message', { message, sender: type });
-
-            dispatch(chatAddMessage({
-                id: currentContact.id,
+            emitAMessage({
+                for: currentContact.email,
+                from: email,
                 content: message,
                 time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                sender: type,
-            }));
-
+            });
 
             if (divInput && divInput.current) {
                 divInput.current.textContent = '';
@@ -79,7 +75,7 @@ export const ChatConversation = ({ currentContact }) => {
                             <>
                                 {
                                     currentMessages.map((e, i) => (
-                                        <div key={e.id} ref={lastMessage} className={`chat__body__messages__message animate__animated animate__fadeInUp ${e.sender == 0 ? 'sender' : 'receptor'}`}>
+                                        <div key={i} ref={lastMessage} className={`chat__body__messages__message animate__animated animate__fadeInUp ${e.sender == 0 ? 'sender' : 'receptor'}`}>
                                             <div className='chat__body__messages__message__text'>
                                                 {e.content}
                                             </div>

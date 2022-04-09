@@ -1,22 +1,26 @@
 import { fetchConToken } from "../helpers/fetch";
 import { types } from "../types/types";
 import { uiStartLoading } from "./ui";
+import axios from 'axios';
 
-
-export const chatSetContacts = () => {
+export const chatStartSetContacts = () => {
 
     return async (dispatch, getState) => {
         dispatch(uiStartLoading());
         const path = getState().auth.userType == 3 ? 'professional/' : 'patient/';
         try {
             const res = await fetchConToken(path);
-            const body = await res.json();
-            console.log(res)
-            console.log(body)
+            // const body = await res.json();
+            if (res.statusText == 'OK') {
+                console.log(res.data)
+                dispatch(chatSetContacts(res.data));
+            } else {
+                console.log(res);
+            }
         } catch (error) {
             console.log(error);
         }
-    }
+    } 
 
 }
 
@@ -56,4 +60,9 @@ export const chatSetSocket = (socket) => ({
 export const chatSetOnline = (online) => ({
     type: types.chatSetOnline,
     payload: online
+})
+
+export const chatSetContacts = (contacts) => ({
+    type: types.chatSetContacts,
+    payload: contacts
 })

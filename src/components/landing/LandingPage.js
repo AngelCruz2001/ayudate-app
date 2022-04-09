@@ -15,17 +15,14 @@ export const LandingPage = () => {
     <>
       <header className="header">
         <a href="#">
-          <img className="logo" alt="Omnifood logo" src="img/omnifood-logo.png" />
+          {/* <img className="logo" alt="Omnifood logo" src="img/omnifood-logo.png" />
+           */}
+           <h1>AYUDATE</h1>
         </a>
 
         <nav className="main-nav">
           <ul className="main-nav-list">
-            <li><a className="main-nav-link" href="#how">How it works</a></li>
-            <li><a className="main-nav-link" href="#meals">Meals</a></li>
-            <li>
-              <a className="main-nav-link" href="#testimonials">Testimonials</a>
-            </li>
-            <li><a className="main-nav-link" href="#pricing">Pricing</a></li>
+
             <li onClick={handleClickLogIn}><a className="main-nav-link nav-cta">Inicia sesión</a></li>
           </ul>
         </nav>
@@ -56,10 +53,10 @@ export const LandingPage = () => {
             </div>
             <div className="hero-img-box">
               <picture>
-                <source srcSet="img/hero.webp" type="image/webp" />
-                <source srcSet="img/hero-min.png" type="image/png" />
+                <source srcSet="https://www.ecestaticos.com/imagestatic/clipping/23d/922/23d922e0e72c26cb3a71b9f92e431088/le-pidio-a-su-jefe-el-dia-libre-por-salud-mental-la-respuesta-fue-brillante.jpg?mtime=1622794608" type="image/webp" />
+                <source srcSet="https://www.ecestaticos.com/imagestatic/clipping/23d/922/23d922e0e72c26cb3a71b9f92e431088/le-pidio-a-su-jefe-el-dia-libre-por-salud-mental-la-respuesta-fue-brillante.jpg?mtime=1622794608" type="image/png" />
                 <img
-                  src="img/hero-min.png"
+                  src="https://www.ecestaticos.com/imagestatic/clipping/23d/922/23d922e0e72c26cb3a71b9f92e431088/le-pidio-a-su-jefe-el-dia-libre-por-salud-mental-la-respuesta-fue-brillante.jpg?mtime=1622794608"
                   className="hero-img"
                   alt="Woman enjoying food, meals in storage container, and food bowls on a table"
                 />
@@ -148,7 +145,7 @@ export const LandingPage = () => {
           <div className="container grid grid--3-cols margin-bottom-md">
             <div className="meal">
               <img
-                src="img/meals/meal-1.jpg"
+                src="https://storage.googleapis.com/www-saludiario-com/wp-content/uploads/2021/02/32557661-mex-como-cuidar-el-bienestar-de-los-profesionales-de-la-salud.jpg"
                 className="meal-img"
                 alt="Japanese Gyozas"
               />
@@ -179,7 +176,7 @@ export const LandingPage = () => {
 
             <div className="meal">
               <img
-                src="img/meals/meal-2.jpg"
+                src="https://www.medicinalliure.com/wp-content/uploads/2018/07/intel%C2%B7lig%C3%A8ncia-emocional_professionals-de-la-salut_-1.jpeg"
                 className="meal-img"
                 alt="Avocado Salad"
               />
