@@ -10,7 +10,7 @@ export const ChatConversation = ({ currentContact }) => {
 
     const { auth: { email, userType }, chat } = useSelector(state => state)
 
-    const { socket, closeConnection, emitAMessage } = useSocket(userType == 0 ? currentContact.email : email, userType == 0 ? email : currentContact.email);
+    const { socket, closeConnection, emitAMessage } = useSocket(userType == 2 ? currentContact.email : email, userType == 3 ? email : currentContact.email);
     const { loading, currentMessages } = chat;
 
     // useEffect(() => {
