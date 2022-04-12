@@ -84,8 +84,8 @@ export const authStartRegisterProfessional = (data, setIsLogin) => {
 
             const res = await fetch(url, { method: 'POST', body: formData });
             const body = await res.json()
-            console.log(body)
-            console.log(res)
+            // console.log(body)
+            // console.log(res)
             Swal.close();
 
             if (res.ok) {
