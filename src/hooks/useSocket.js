@@ -13,7 +13,7 @@ export const useSocket = (userProfe = '', userPatient = '') => {
     const ws = useMemo(() => {
         console.log(roomName)
         // return new WebSocket(`ws://127.0.0.1:8000/ws/chat/${roomName}/`)
-        return new WebSocket(`ws://ayudat-backend.herokuapp.com/ws/chat/${roomName}/`)
+        return new WebSocket(`wss://ayudat-backend.herokuapp.com/ws/chat/${roomName}/`)
     }, [roomName])
 
     const [online, setOnline] = useState(false);
