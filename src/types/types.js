@@ -21,5 +21,4 @@ export const types = {
     chatSetSocket: '[chat] Set Socket',
     chatSetOnline: '[chat] Set Online',
     chatSetContacts: '[chat] Set Contacts',
-
 }

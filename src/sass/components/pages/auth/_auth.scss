@@ -160,14 +160,14 @@
                     border-radius: 1rem;
                     font-weight: 600;
                     padding: 0 2rem;
-
+                    cursor: pointer;
                     &.create {
                         background-color: $color_secondary;
                         color: white;
                         opacity: 0.5;
-                        cursor: not-allowed;
-
+                        
                         &.formikValid {
+                            cursor: not-allowed;
                             background-color: $color_secondary;
                             color: white;
                             cursor: pointer;

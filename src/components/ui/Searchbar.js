@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
-export const Searchbar = ({ searchValue, setSearchValue }) => {
-
+export const Searchbar = ({ searchValue, setSearchValue, isOpen, setIsOpen }) => {
 
 
     const handleSearch = (e) => {
@@ -12,6 +11,7 @@ export const Searchbar = ({ searchValue, setSearchValue }) => {
         setSearchValue(prev => ({ ...prev, filter: e.target.value }))
     }
 
+    const handleClickIsOpen = () => setIsOpen(prev => !prev)
 
     return (
         <div className="searchbar">
@@ -33,7 +33,18 @@ export const Searchbar = ({ searchValue, setSearchValue }) => {
                     <option value={true}>Aceptados</option>
                 </select>
             </div>
+{/* 
+            <div className="addUser" onClick={handleClickIsOpen}>
+                <i className="fa-solid fa-plus"></i>
+                <span>Agregar usuario</span>
+            </div> */}
 
         </div>
     )
 }
+
+// email
+// fname
+// lname
+// password
+// phone

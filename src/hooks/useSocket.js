@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const { useDispatch, useSelector } = require("react-redux");
-const { chatSetSocket, chatSetOnline, chatSetCurrentMessages, chatAddMessage } = require("../actions/chat");
+const { chatSetSocket, chatSetOnline, chatSetCurrentMessages, chatAddMessage, chatStartLoading, chatFinishLoading } = require("../actions/chat");
 
 export const useSocket = (userProfe = '', userPatient = '') => {
     const dispath = useDispatch()
@@ -9,28 +9,39 @@ export const useSocket = (userProfe = '', userPatient = '') => {
     // profe + patient
     // quit @ . - _ . 
     const roomName = userProfe.replace(/[@.\-_]/g, '') + userPatient.replace(/[@.\-_]/g, '');
+        
     const ws = useMemo(() => {
         console.log(roomName)
-        // return new WebSocket(`ws://127.0.0.1:8000/ws/chat/asdf/`)
-
+        // return new WebSocket(`ws://127.0.0.1:8000/ws/chat/${roomName}/`)
         return new WebSocket(`ws://ayudat-backend.herokuapp.com/ws/chat/${roomName}/`)
     }, [roomName])
+
     const [online, setOnline] = useState(false);
+
+    useEffect(() => {
+        dispath(chatStartLoading())
+        return () => {
+            ws.close()
+        }
+    }, [])
 
     ws.onopen = (data) => {
         dispath(chatSetSocket(ws));
         setOnline(true);
+        dispath(chatFinishLoading())
         console.log("Socket connected")
     };
 
     ws.onmessage = (event) => {
         const data = JSON.parse(event.data);
 
-        if (data.conversationId !== undefined) {
-            dispath(chatSetCurrentMessages(data.messages));
+        if (data.typeFront === 'chat_started') {
+            data.messages.pop()
+            const messageToPush = data.messages == '' ? [] : data.messages;
+            dispath(chatSetCurrentMessages(messageToPush.map(message => JSON.parse(message.replace(/'/g, '"')))));
         }
 
-        if (data.type === 'chat_message') {
+        if (data.typeFront === 'chat_message') {
             console.log(data)
             dispath(chatAddMessage({ ...data, sender: data.from === email ? 0 : 1 }));
         }
@@ -38,6 +49,8 @@ export const useSocket = (userProfe = '', userPatient = '') => {
     };
 
     ws.onclose = () => {
+        console.log("Socket closed")
+
         dispath(chatSetSocket(null));
         setOnline(false);
         dispath(chatSetOnline(false));

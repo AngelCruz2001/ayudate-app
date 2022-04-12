@@ -11,7 +11,8 @@ export const AuthScreen = () => {
 
         <section className='login'>
             <div className='login__card'>
-                <div className='login__card__svg'>
+                <div className='login__card__svg animate__animated
+                animate__fadeIn'>
                     <img src="./svg/personalData.svg" alt="" />
                 </div>
                 <div className='login__card__log '>

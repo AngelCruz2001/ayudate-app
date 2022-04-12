@@ -5,8 +5,13 @@ import { ListItemActions } from './ListItemActions'
 export const ListItem = ({ profe }) => {
 
     const { loading } = useSelector(state => state.ui)
-    const handleDownload = (document) => {
-        // Download a document.
+    const handleDownload = (doc) => {
+        // Download a doc from a URL
+        console.log(doc)
+        // const a = document.createElement('a');
+        // a.href = document;
+        // a.download = document.split('/').pop();
+        // a.click();
     }
 
 
@@ -40,13 +45,15 @@ export const ListItem = ({ profe }) => {
 
                 </div>
 
-                <button
+                <a
                     className="btn btn-download document"
-                    onClick={() => handleDownload(profe.document)}
+                    // onClick={() => handleDownload(profe.document)}
+                    href={profe.document1}
+                    target="_blank"
                 >
                     <span>Cedula</span>
                     <i className="fa-solid fa-arrow-down"></i>
-                </button>
+                </a>
             </div>
 
             <ListItemActions profe={profe} />

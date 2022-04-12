@@ -7,6 +7,16 @@
     align-items: center;
     padding: 2rem 1rem;
     gap: 5rem;
+    &__logout {
+        margin-top: auto;
+        cursor: pointer;
+    }
+    &__seeUsers { 
+        cursor: pointer;
+    }
+    &__chat {
+        cursor: pointer;
+    } 
     img {
         max-width: 5.5rem;
         margin-bottom: 3rem;

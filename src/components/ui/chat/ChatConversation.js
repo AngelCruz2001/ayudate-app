@@ -10,15 +10,8 @@ export const ChatConversation = ({ currentContact }) => {
 
     const { auth: { email, userType }, chat } = useSelector(state => state)
 
-    const { socket, closeConnection, emitAMessage } = useSocket(userType == 2 ? currentContact.email : email, userType == 3 ? email : currentContact.email);
+    const { emitAMessage } = useSocket(userType == 2 ? email : currentContact.email, userType == 2 ? currentContact.email : email);
     const { loading, currentMessages } = chat;
-
-    // useEffect(() => {
-
-    //     return () => {
-    //         closeConnection();
-    //     }
-    // }, [closeConnection])
 
 
     const lastMessage = useRef(undefined);
@@ -30,7 +23,7 @@ export const ChatConversation = ({ currentContact }) => {
 
     useLayoutEffect(() => {
         lastMessage && lastMessage.current && scrollIntoLastMessage();
-    }, [lastMessage, message]);
+    }, [currentMessages]);
 
 
     const handleInputChange = ({ target }) => {
@@ -59,10 +52,10 @@ export const ChatConversation = ({ currentContact }) => {
         <>
             <div className="chat__header">
                 <div className="chat__header__avatar">
-                    <img src={currentContact.avatar} alt="" />
+                    <img src={currentContact.document2} alt="" />
                 </div>
                 <div className="chat__header__receptor">
-                    {currentContact.name}
+                    {currentContact.fname} {currentContact.lname}
                 </div>
             </div>
 
@@ -75,7 +68,7 @@ export const ChatConversation = ({ currentContact }) => {
                             <>
                                 {
                                     currentMessages.map((e, i) => (
-                                        <div key={i} ref={lastMessage} className={`chat__body__messages__message animate__animated animate__fadeInUp ${e.sender == 0 ? 'sender' : 'receptor'}`}>
+                                        <div key={i} ref={lastMessage} className={`chat__body__messages__message animate__animated animate__fadeInUp ${e.from == email ? 'sender' : 'receptor'}`}>
                                             <div className='chat__body__messages__message__text'>
                                                 {e.content}
                                             </div>
@@ -85,7 +78,6 @@ export const ChatConversation = ({ currentContact }) => {
                                 }
                             </>
                     }
-
                 </div>
 
                 <div className="chat__body__send">

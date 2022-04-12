@@ -8,7 +8,6 @@ export const PublicRoute = ({ children }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log('asdf')
         dispatch(authStartRefresh())
     }, [dispatch])
 

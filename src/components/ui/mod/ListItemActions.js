@@ -4,36 +4,25 @@ import { profStartAcceptProfessional, profStartDeleteProfessional, profStartReje
 
 export const ListItemActions = ({ profe = {} }) => {
     const dispatch = useDispatch()
-    console.log(profe)
+
     const handleAcceptProfessional = () => {
-        // Accept a proffesional.
-        dispatch(profStartAcceptProfessional(profe.id))
-        console.log(profe.id)
-    }
-
-    const handleRejectProfessional = () => {
-        // Reject a proffesional.
-        dispatch(profStartRejectProfessional(profe.id))
-
-        console.log(profe.id)
+        dispatch(profStartAcceptProfessional(profe.email))
     }
 
     const handleDeleteProfessional = () => {
-        // Delete a proffesional.
-        dispatch(profStartDeleteProfessional(profe.id))
-        console.log(profe.id)
+        dispatch(profStartDeleteProfessional(profe.email))
     }
 
     return (
         <div className="mod__list__item__actions">
             {
-                profe.status ?
+                profe.is_accepted ?
                     <button className='btn btn-delete' onClick={handleDeleteProfessional} >
                         <i className="fa-solid fa-trash"></i>
                     </button>
                     :
                     <>
-                        <button className='btn btn-decline' onClick={handleRejectProfessional}>
+                        <button className='btn btn-decline' onClick={handleDeleteProfessional}>
                             <i className="fas fa-times"></i>
                         </button>
                         <button className='btn btn-accept' onClick={handleAcceptProfessional}>

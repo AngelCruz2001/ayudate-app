@@ -1,4 +1,6 @@
-import { fetchSinToken } from "../helpers/fetch"
+import axios from "axios"
+import Swal from "sweetalert2"
+import { fetchConToken, fetchSinToken } from "../helpers/fetch"
 import { types } from "../types/types"
 import { uiFinishLoading, uiStartLoading } from "./ui"
 
@@ -6,89 +8,75 @@ export const profStartGetProfessionals = () => {
     return async (dispatch) => {
         dispatch(uiStartLoading())
         try {
-            // const resp = await fetchSinToken('professional/', {}, 'GET')
+            const res = await fetchConToken('professional/', {}, 'GET')
             // const body = await resp.json()
-            // console.log(resp)
-            // console.log(body)
-            // dispatch(profGetProfessionals(body))
-            setTimeout(() => {
-                dispatch(profGetProfessionals(
-                    [
-                        {
-                            id: 1,
-                            fname: 'José Angel',
-                            lname: 'Badillo Sanchez',
-                            phone: '6183259226',
-                            curp: 'ABCD1234567890123',
-                            email: 'juan.perez@ayudate.com',
-                            schedule: '8:00 am a 9:00 pm',
-                            document: new File([], 'document.pdf'),
-                            document2: 'https://static.vecteezy.com/system/resources/thumbnails/001/993/889/small/beautiful-latin-woman-avatar-character-icon-free-vector.jpg',
-                            status: false
-                        },
-                        {
-                            id: 2,
-                            fname: 'Angel',
-                            lname: 'Cruz García',
-                            phone: '6183259226',
-                            curp: 'ABCD1234567890123',
-                            email: 'angel.cruz@ayudateasdf.com',
-                            schedule: '7:00 am a 8:00 pm',
-                            document: 'asdf',
-                            document2: 'https://media.istockphoto.com/photos/businessman-silhouette-as-avatar-or-default-profile-picture-picture-id476085198?k=20&m=476085198&s=170667a&w=0&h=FXkT-N6vISLOCUefa9MyQg0pH-6loMX9zBZjgLK458c=',
-                            status: true
-                        }
-                    ]
-                ))
-                dispatch(uiFinishLoading())
+            if (res.statusText == 'OK') {
+                dispatch(profGetProfessionals(res.data))
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un error, intente nuevamente'
+                })
 
-            }, 1000)
+            }
 
-            // dispatch(uiFinishLoading())
         } catch (error) {
             console.log(error)
         }
+        dispatch(uiFinishLoading())
     }
 
 }
 
-export const profStartAcceptProfessional = (idProfessional) => {
+export const profStartAcceptProfessional = (emailProfessional) => {
     return async (dispatch) => {
         dispatch(uiStartLoading())
+        console.log(emailProfessional)
         try {
-            // All the stuff that needs to be done with the backend
-            dispatch(profAcceptProfessional(idProfessional))
-            dispatch(uiFinishLoading())
+
+            const res = await fetchConToken('professional/accept/', { email: emailProfessional }, 'put')
+            console.log(res)
+            if (res.statusText == 'OK') {
+                dispatch(profAcceptProfessional(emailProfessional))
+            } else {
+                console.log(res)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un error, intente nuevamente'
+                })
+            }
+
         } catch (error) {
             console.log(error)
         }
+        dispatch(uiFinishLoading())
+
     }
 }
-export const profStartRejectProfessional = (idProfessional) => {
+
+
+export const profStartDeleteProfessional = (emailProfessional) => {
     return async (dispatch) => {
         dispatch(uiStartLoading())
         try {
-            // All the stuff that needs to be done with the backend
-            dispatch(profRejectProfessional(idProfessional))
-            dispatch(uiFinishLoading())
+            const res = await fetchConToken('professional/', { email: emailProfessional }, 'delete')
+           
+            if (res.statusText == 'OK') {
+                dispatch(profDeleteProfessional(emailProfessional))
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Hubo un error, intente nuevamente'
+                })
+            }
 
         } catch (error) {
             console.log(error)
         }
-    }
-}
-
-export const profStartDeleteProfessional = (idProfessional) => {
-    return async (dispatch) => {
-        dispatch(uiStartLoading())
-        try {
-            // All the stuff that needs to be done with the backend
-            dispatch(profDeleteProfessional(idProfessional))
-            dispatch(uiFinishLoading())
-
-        } catch (error) {
-            console.log(error)
-        }
+        dispatch(uiFinishLoading())
     }
 }
 
@@ -99,17 +87,17 @@ const profGetProfessionals = (professionals) => ({
     payload: professionals
 })
 
-const profAcceptProfessional = (idÞrofessional) => ({
+const profAcceptProfessional = (emailProfessional) => ({
     type: types.profAcceptProfessional,
-    payload: idÞrofessional
+    payload: emailProfessional
 })
 
-const profRejectProfessional = (idÞrofessional) => ({
+const profRejectProfessional = (emailProfessional) => ({
     type: types.profRejectProfessional,
-    payload: idÞrofessional
+    payload: emailProfessional
 })
 
-const profDeleteProfessional = (idÞrofessional) => ({
+const profDeleteProfessional = (emailProfessional) => ({
     type: types.profDeleteProfessional,
-    payload: idÞrofessional
+    payload: emailProfessional
 })

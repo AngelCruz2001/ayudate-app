@@ -5,12 +5,17 @@ import { List } from '../ui/mod/List'
 import { Searchbar } from '../ui/Searchbar'
 import { Sidebar } from '../ui/sidebar/Sidebar'
 import { profStartGetProfessionals } from '../../actions/professional'
+import { Modal } from '../ui/Modal'
 
 
 export const ModScreen = () => {
   const dispatch = useDispatch();
   const { prof: { data }, ui: { loading } } = useSelector(state => state)
+
+  const [isOpen, setIsOpen] = useState(false)
+
   const [searchValue, setSearchValue] = useState({ word: '', filter: '' })
+
   const [professionals, setProfessionals] = useState([])
 
   useEffect(() => {
@@ -22,8 +27,8 @@ export const ModScreen = () => {
   }, [data])
 
   useEffect(() => {
-    let professionalsFiltered = data.filter(p => isACoincidenceSearch([p.fname, p.curp], searchValue.word))
-    professionalsFiltered = professionalsFiltered.filter(p => (p.status).toString() === searchValue.filter || searchValue.filter === '')
+    let professionalsFiltered = data.filter(p => isACoincidenceSearch([p.fname, p.lname, p.curp], searchValue.word))
+    professionalsFiltered = professionalsFiltered.filter(p => (p.is_active) === searchValue.filter || searchValue.filter === '')
     setProfessionals(professionalsFiltered)
 
   }, [searchValue.word, searchValue.filter])
@@ -31,6 +36,7 @@ export const ModScreen = () => {
   return (
     <>
       <Sidebar />
+
       <div className='mod'>
 
         <header>
@@ -42,10 +48,15 @@ export const ModScreen = () => {
           <Searchbar
             searchValue={searchValue}
             setSearchValue={setSearchValue}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
           />
 
           <List professionals={professionals} loading={loading} />
+
         </div>
+
+        {/* <Modal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
 
       </div>
     </>

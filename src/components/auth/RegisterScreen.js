@@ -10,6 +10,7 @@ import { inputsRegister } from '../../formikConfig/inputs/inputsRegister';
 
 
 export const RegisterScreen = ({ handleClick }) => {
+    
     const dispatch = useDispatch();
 
     const [isPatient, setIsPatient] = useState(true);

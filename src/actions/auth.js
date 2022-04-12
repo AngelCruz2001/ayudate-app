@@ -8,8 +8,8 @@ export const authStartLogin = (email, password) => {
     return async (dispatch) => {
         try {
             Swal.fire({
-                title: 'Uploading...',
-                html: 'Please wait...',
+                title: 'Iniciando sesión',
+                html: 'Por favor espere.',
                 allowEscapeKey: false,
                 allowOutsideClick: false,
                 didOpen: () => {
@@ -37,6 +37,7 @@ export const authStartLogin = (email, password) => {
                     userType: body.userType,
                     token: body.data.access,
                 }));
+                Swal.close();
 
             } else {
                 Swal.fire({
@@ -46,7 +47,6 @@ export const authStartLogin = (email, password) => {
                 })
             }
 
-            Swal.close();
 
         } catch (error) {
             console.log(error);
@@ -150,6 +150,7 @@ export const authStartRegisterPatient = (data, setIsLogin) => {
 }
 
 export const authStartRefresh = () => {
+    console.log("Cacota")
     return async (dispatch) => {
         // try {
         //     const res = await fetchConToken('auth/login/refresh/', {
@@ -159,11 +160,11 @@ export const authStartRefresh = () => {
         //     const body = await res.json();
         //     if (res.ok) {
         //         localStorage.setItem('token', body.access);
-        //         dispatch(authLogIn({
-        //             email: body.email,
-        //             userType: body.userType,
-        //             token: body.access,
-        //         }));
+        // dispatch(authLogIn({
+        //     email: body.email,
+        //     userType: body.userType,
+        //     token: body.access,
+        // }));
         //     } else {
         //         dispatch(authLogOut());
         //     }

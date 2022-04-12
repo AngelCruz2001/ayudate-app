@@ -6,9 +6,6 @@ import { DashboardRoutesLogin } from './DashboardRoutesLogin';
 import { LandingPage } from '../components/landing/LandingPage';
 
 
-
-
-
 export const AppRouter = () => {
 
   
@@ -25,6 +22,7 @@ export const AppRouter = () => {
                     </PublicRoute>
                 }
                 />
+
 
                 <Route path="main/*" element={
                     <PrivateRoute>

@@ -53,6 +53,18 @@ export const chatReducer = (state = initialValues, action) => {
                 contacts: action.payload
             }
 
+        case types.chatStartLoading:
+            return {
+                ...state,
+                loading: action.payload
+            }
+
+        case types.chatFinishLoading:
+            return {
+                ...state,
+                loading: action.payload
+            }
+
         default:
             return state
     }
