@@ -22,15 +22,13 @@
     "sweetalert2": "^10.14.1",
     "use-file-picker": "^1.4.2",
     "web-vitals": "^2.1.4",
-    "yup": "^0.32.11",
-    "serve" : "13.0.2"
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "serve -s build"
   },
   "eslintConfig": {
     "extends": [
