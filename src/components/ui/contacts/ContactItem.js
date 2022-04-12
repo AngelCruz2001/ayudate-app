@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ContactItem = ({ key, contact, handleClickContact, currentContact, }) => {
+export const ContactItem = ({ contact, handleClickContact, currentContact, }) => {
     return (
         <div
             className={`contacts__list__contact animate__animated animate__slideInLeft ${currentContact && currentContact.id === contact.id ? 'current' : ''}`}

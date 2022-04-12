@@ -24,18 +24,17 @@ const fetchSinToken = (endpoint, data, method = 'GET') => {
 const fetchConToken = (endpoint, data, method = 'GET') => {
     const url = `${baseUrl}/${endpoint}`;
     const token = localStorage.getItem('token') || '';
-    console.log(url, method)
-    console.log(method)
+    // console.log(url, method)
+    // console.log(method)
     if (method === 'GET') {
-        console.log("CACA")
+        // console.log("CACA")
         return axios({
             method,
             headers: { 'Authorization': 'Bearer ' + token, },
             url: url,
         })
     } else {
-        console.log("CACA")
-        console.log(data)
+        // console.log("CACA")
         return axios({
             method,
             headers: { 

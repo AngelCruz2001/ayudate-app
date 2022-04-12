@@ -12,7 +12,7 @@ export const chatStartSetContacts = () => {
             const res = await fetchConToken(path);
             // const body = await res.json();
             if (res.statusText == 'OK') {
-                console.log(res.data)
+                // console.log(res.data)
                 dispatch(chatSetContacts(res.data));
             } else {
                 console.log(res);

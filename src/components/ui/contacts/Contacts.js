@@ -16,7 +16,6 @@ export const Contacts = () => {
         dispatch(chatSetCurrentContact(contact));
 
     }
-    // console.log(contacts.filter(({ name }) => name.match(RegExp(searchValue, 'gi'))));
 
     useEffect(() => {
         dispatch(chatStartSetContacts());
@@ -45,7 +44,7 @@ export const Contacts = () => {
                         .match(RegExp(searchValue, 'gi')))
                         .map(contact => (
                             <ContactItem
-                                key={contact.id}
+                                key={contact.email}
                                 contact={contact}
                                 handleClickContact={handleClickContact}
                                 currentContact={currentContact}

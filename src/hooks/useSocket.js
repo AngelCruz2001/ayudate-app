@@ -11,7 +11,7 @@ export const useSocket = (userProfe = '', userPatient = '') => {
     const roomName = userProfe.replace(/[@.\-_]/g, '') + userPatient.replace(/[@.\-_]/g, '');
         
     const ws = useMemo(() => {
-        console.log(roomName)
+        // console.log(roomName)
         // return new WebSocket(`ws://127.0.0.1:8000/ws/chat/${roomName}/`)
         return new WebSocket(`wss://ayudat-backend.herokuapp.com/ws/chat/${roomName}/`)
     }, [roomName])
@@ -26,10 +26,9 @@ export const useSocket = (userProfe = '', userPatient = '') => {
     }, [])
 
     ws.onopen = (data) => {
-        dispath(chatSetSocket(ws));
-        setOnline(true);
-        dispath(chatFinishLoading())
         console.log("Socket connected")
+        dispath(chatSetSocket(ws));
+        dispath(chatFinishLoading())
     };
 
     ws.onmessage = (event) => {
@@ -42,7 +41,7 @@ export const useSocket = (userProfe = '', userPatient = '') => {
         }
 
         if (data.typeFront === 'chat_message') {
-            console.log(data)
+            // console.log(data)
             dispath(chatAddMessage({ ...data, sender: data.from === email ? 0 : 1 }));
         }
 

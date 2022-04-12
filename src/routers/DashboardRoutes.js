@@ -8,7 +8,7 @@ export const DashboardRoutes = () => {
         <section className='main'>
             <div className='main__card'>
                 <Routes>
-                    <Route path="/professional" element={<ProfessionalScreen />} />
+                    <Route path="/chat" element={<ProfessionalScreen />} />
                     <Route path="/mod" element={<ModScreen />} />
                     <Route path="*" element={<Home />} />
                 </Routes>

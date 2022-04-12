@@ -150,7 +150,6 @@ export const authStartRegisterPatient = (data, setIsLogin) => {
 }
 
 export const authStartRefresh = () => {
-    console.log("Cacota")
     return async (dispatch) => {
         // try {
         //     const res = await fetchConToken('auth/login/refresh/', {

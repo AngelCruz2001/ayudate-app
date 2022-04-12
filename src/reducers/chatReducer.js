@@ -16,7 +16,8 @@ export const chatReducer = (state = initialValues, action) => {
         case types.chatSetCurrentContact:
             return {
                 ...state,
-                currentContact: action.payload
+                currentContact: action.payload,
+                loading: true
             }
         case types.chatAddMessage:
             return {
@@ -33,7 +34,7 @@ export const chatReducer = (state = initialValues, action) => {
         case types.chatDeleteCurrentChat:
             return {
                 ...state,
-                currentContact: null
+                currentMessages: []
             }
 
         case types.chatSetSocket:
@@ -56,13 +57,13 @@ export const chatReducer = (state = initialValues, action) => {
         case types.chatStartLoading:
             return {
                 ...state,
-                loading: action.payload
+                loading: true
             }
 
         case types.chatFinishLoading:
             return {
                 ...state,
-                loading: action.payload
+                loading: false
             }
 
         default:

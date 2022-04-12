@@ -17,6 +17,7 @@ export const Sidebar = () => {
     const handleLogOut = () => {
         dispatch(authLogOut());
     }
+
     return (
         <div className="sidebar">
 
@@ -26,13 +27,13 @@ export const Sidebar = () => {
 
             {
                 [2, 3].includes(userType) &&
-                <div className="sidebar__chat" onClick={() => handleNavigate('/main/professional')}>
+                <div className="sidebar__chat" onClick={() => handleNavigate('/main/chat')}>
                     <i className="fa-solid fa-comment"></i>
                 </div>
             }
 
             {
-                // userType == 1 &&
+                userType == 1 &&
                 <div className="sidebar__seeUsers" onClick={() => handleNavigate('/main/mod')}>
                     <i className="fa-solid fa-users"></i>
                 </div>
