@@ -1,14 +1,13 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux';
 
-export const useChat = ({ emitAMessage, currentMessages, email, currentContact }) => {
-
+export const useChat = ({ emitAMessage, email ,currentMessages, currentContact }) => {
     const lastMessage = useRef(undefined);
     const divInput = useRef(undefined);
     const [message, setMessage] = useState('');
 
     const scrollIntoLastMessage = () => lastMessage.current.scrollIntoView({ behavior: 'smooth' });
-
+    console.log(currentContact);
     useLayoutEffect(() => {
         lastMessage && lastMessage.current && scrollIntoLastMessage();
     }, [currentMessages]);
@@ -20,7 +19,7 @@ export const useChat = ({ emitAMessage, currentMessages, email, currentContact }
     const handleEnter = (e) => {
         if (e.key === 'Enter' && message !== '') {
             e.preventDefault();
-
+            console.log(currentContact);
             emitAMessage({
                 for: currentContact.email,
                 from: email,
