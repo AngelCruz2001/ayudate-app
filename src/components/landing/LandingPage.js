@@ -316,7 +316,7 @@ export const LandingPage = () => {
                 </li>
               </ul>
               <div className="plan-sing-up">
-                <a href="#" className="btn btn--full">Inicia sesión</a>
+                <span  className="btn btn--full" onClick={handleClickLogIn}>Inicia sesión</span>
               </div>
             </div>
           </div>
@@ -353,43 +353,7 @@ export const LandingPage = () => {
           </div>
         </section>
 
-        <section className="section-cta" id="cta">
-          <div className="container">
-            <div className="cta">
-              <div className="cta-text-box">
-                <h2 className="heading-secondary">Registrate para comenzar</h2>
-                <p className="cta-text">
-                  ¿Quieres comenzar a trabajar con nosotros? ¡Registrate!
-                  Llena el formulario y comienza a trabajar con nosotros.
-                </p>
-
-                <form className="cta-form" name="sign-up" netlify>
-                  <div>
-                    <label for="full-name">Nombres</label>
-                    <input
-                      id="fname"
-                      type="text"
-                      placeholder="Salvador"
-                      name="fname-name"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label for="lname">Apellidos</label>
-                    <input
-                      id="lname"
-                      placeholder="Gutierrez"
-                      name="lname"
-                      required
-                    />
-                  </div>
-                  <button className="btn btn--form">Comienza ahora</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
+        
       </main>
 
       {/* <footer className="footer">
