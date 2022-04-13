@@ -9,8 +9,8 @@ export const LoginScreen = ({ handleClick }) => {
 
     const { handleSubmit, errors, touched, getFieldProps, resetForm, isValid } = useFormik({
         initialValues: {
-            email: 'angi_ed01Patient@hotmail.com',
-            password: '123456',
+            email: '',
+            password: '',
         },
         isInitialValid: false,
 
